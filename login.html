@@ -16,12 +16,30 @@
   </style>
 </head>
 
-<body>
+<body class="text-center">
   <main class="mt-5">
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+    <div class="container signin">
+      <form>
+        <img src="../workspace-inicial/img/login.png" height="180px" width="300px" >
+
+        <h1 class="h3 mb-3 fw-normal">Inicio de sesión</h1>
+        <div class="form-outline mb-4">
+          <label for="email">Dirección de Email</label>
+          <input type="email" class= "form-control" id="email" placeholder="Email">  
+        </div>
+
+        <div class="form-outline mb-4">
+          <label for="pass">Contraseña</label>
+          <input type="password" class="form-control" id="pass" placeholder="Password"> 
+        </div>
+
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="Recuérdame"> Recuérdame
+          </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit" id="entrar">Ingresar</button>
+      </form>
     </div>
   </main>
   <footer class="text-muted">
