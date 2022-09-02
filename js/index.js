@@ -11,17 +11,9 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
-
-    /* Evento al id "goodBye" para que remueva el usuario de localstorage y se diriga a login.html
-    variable para traer el usuario y en caso de que sea null se diriga a login.html */
-    document.getElementById("goodBye").addEventListener("click", () =>{
-        localStorage.removeItem("Usuario");
-        location.href = "login.html";
-    })
-
-    let usuario = localStorage.getItem('Usuario');
+/*Almacenamos en variable el dato de usuario con getItem y en caso de que sea null se dirigirá a login.html.*/
+    let usuario = localStorage.getItem("user");
     
-        if(usuario==null){
-            location.href= "login.html";
-        }
+    if(usuario == null){
+        location.replace("login.html");}
 });
