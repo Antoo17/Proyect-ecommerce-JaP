@@ -2,7 +2,7 @@ const prod_priceASC = "Asc";
 const prod_priceDESC = "Desc";
 const order_productCount = "Cant.";
 
-/*******Función de orden*********/
+/********* Función de orden *********/
 
 /*Creamos array vacío, si el parámetro criteria es igual a la constante prod_priceASC
 se carga en resultado el array ordenado según la condición que si el precio del producto a es menor al de b lo coloca en primer lugar; de lo contrario se coloca a b primero.
@@ -47,17 +47,17 @@ function sortAndShowProducts(sortCriteria, listprodsArray){
     ProductsArray = sortProducts(criteriaOrder, ProductsArray);
 
     //Se muestran los productos ordenados
-    showProductsList(ProductsArray);
+    ProductsList(ProductsArray);
 }
 
-/***** Función de filtrado *****/
+/********* Función de filtrado *********/
 
 /*Se agarra el valor de cada input y se lo guarda en las variables priceMin y priceMax.
 Se define un array vacío donde guardaremos los elementos filtrados.
-Dicho filter se aplica al array "ProductsArray" para filtrar de productos el costo de cada uno y se especifica como parámetro
-en una función que determine el costo de los productos sea mayor o igual al priceMin y menor o igual a priceMax.
-Este array se pasa como parámetro de la función showProductsList para que muestre solo los elementos que se filtren acá.
- */
+Dicho filter se aplica al array "ProductsArray" para filtrar, de productos, el costo de cada uno y se especifica como parámetro
+en una función que determine que el costo de los productos sea mayor o igual al priceMin y menor o igual a priceMax.
+Este array se pasa como parámetro de la función ProductsList para que muestre solo los elementos que se filtren acá.*/
+
 function filterProducts(){
 
     let priceMin = document.getElementById("rangeFilterCountMin").value;
@@ -66,14 +66,35 @@ function filterProducts(){
     let productsFiltered = [];
 
     productsFiltered = ProductsArray.filter(prods => parseInt(prods.cost) >= priceMin && parseInt(prods.cost) <= priceMax);
-    showProductsList(productsFiltered);
+    ProductsList(productsFiltered);
 }
 
+/********* Función buscar por palabra *********/
+/*Variable donde se guarda el valor del input con id "searchProduct".
+Array donde guardaremos la información "productFilteredByWord".
+Ciclo for: para la variable producto de ProductsArray se crea una variable donde guardaremos el nombre del producto considerando minúsuclas.
+Condición: si el usuario escribe x letra y la encuentra retornará cualquier cosa a -1. Dicha variable donde guardamos el valor ingresado es diferente de -1 se agrega el elemento con push al array productoFilteredByWord
+IndexOf retorna el primer índice en el que se puede encontrar un elemento.*/
+
+function searchForWord (){
+    let searchWord = document.getElementById("searchProduct").value.toLowerCase();
+    let productFilteredByWord = [];
+    for(let product of ProductsArray){
+        let nameProduct = product.name.toLowerCase()
+        let infoProduct = product.description.toLowerCase()
+        if ((nameProduct.indexOf(searchWord) !== -1)||(infoProduct.indexOf(searchWord) !== -1)){
+            productFilteredByWord.push(product)
+        }
+        ProductsList(productFilteredByWord);
+    }
+}
+
+/********* Traer información con FETCH *********/
 /*Se crea constante para guardar la url. En la variable ProductsArray se guarda el json.
-Con el DOM cargado se utiliza la función getJSONData del script init.js que nos pide la url y con el then le pasamos otra función
+Con el DOM contentLoaded cargado se utiliza la función getJSONData del script init.js que nos pide la url y con el then le pasamos otra función.
 con el resultado. Si el estatus del resultado está ok se carga en el array creado "ProductsArray".
-Con el DOM se agarra el ID "category" para que con innerHTML ingrese del json.data el catName.
-Por último se llama a la función showProductsList pasándole el parámetro del array que traerá de forma dinámica los datos
+Agarro el ID "category" para que con innerHTML ingrese del json.data el catName correspondiente.
+Por último se llama a la función ProductsList pasándole el parámetro del array que traerá de forma dinámica los datos
 del json a la página productos.html. */
 
 let categories = localStorage.getItem("catID");
@@ -87,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ProductsArray = resultObj.data.products
             console.log(ProductsArray);
             document.getElementById("category").innerHTML = resultObj.data.catName
-            showProductsList(ProductsArray);   
+            ProductsList(ProductsArray);   
         }
     });
 
@@ -108,19 +129,24 @@ document.addEventListener("DOMContentLoaded", () => {
         })
 
     document.getElementById("clearRangeFilter").addEventListener("click", () => {
-        showProductsList(ProductsArray);
+        ProductsList(ProductsArray);
 
         document.getElementById("rangeFilterCountMin").value = "";
         document.getElementById("rangeFilterCountMax").value = "";
-        });    
+        });
+    
+    document.getElementById("searchProduct").addEventListener("keyup", ()=> {
+        searchForWord()
+    })
 })
 
-/********* PASO A PASO *********/ 
+/********* Función para mostrar los productos *********/ 
 /*En esta función se ingresa una variable vacía "showInfo".
 Con el for se indica que para cada auto del array listProducts (general) deberá cargar en "showInfo" todas las etiquetas div con sus clases donde se especifica con los backticks la expresión para acceder a la propiedad correspondiente que queremos mostrar. 
-Por último, se carga la información de "showInfo" en la etiqueta div con id "cat-list-container".*/
+Por último, se carga la información de "showInfo" en la etiqueta div con id "cat-list-container".
+Una vez cargado el DOM, se hace uso de esta función para mostrar el array "ProductsArray"*/
 
-function showProductsList(listProducts){
+function ProductsList(listProducts){
     let showInfo = "";
     for (let prods of listProducts){
         showInfo += `

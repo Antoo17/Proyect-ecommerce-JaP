@@ -10,8 +10,8 @@ La constante validateEmail es una expresión regular y corresponde a una secuenc
 
 Con la condición validamos si es correcto el mail introducido. Test sirve para corroborar si el texto coincide con el patrón indicado.*/
 
-/*Función de login, se guarda en la constante valueEmail la información que trae validateEmail()
-Se crea condición en la que si la constante es true se guarda en local storage el usuario y se redirige a la página index.html.
+/*Función de login, se guarda en la constante userEmail la información que trae validateEmail()
+Condición: si el valor de la constante es true se guarda en local storage el usuario y se redirige a la página index.html.
 En caso contrario se muestra la alerta de mail incorrecto.
 Se crea el evento al botón, ya que al clickearlo se hace uso de la función.*/
 
@@ -28,10 +28,10 @@ function validateEmail(){
 }
 
 function login(){
-    const valueEmail = validateEmail()
+    const userEmail = validateEmail()
 
-        if (valueEmail) {
-            localStorage.setItem("user", valueEmail)
+        if (userEmail) {
+            localStorage.setItem("user", userEmail)
             location.href="index.html"
         } else {
             alert("La dirección de email no es válida")
