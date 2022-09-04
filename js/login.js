@@ -1,14 +1,17 @@
 /***** PASO A PASO *****/ 
 
-/*Función para validar que se esté ingresando un mail. Se llama al valor introducido en el input de id "email".
+/***** Función para validar que se esté ingresando un mail *****/ 
+/*Se llama al valor introducido en el input de id "email".
 La constante validateEmail es una expresión regular y corresponde a una secuencia de caracteres que conforma un patrón de búsqueda y así encontrar una o varias coincidencias en el texto.
 Con la condición validamos si es correcto el mail introducido. Test sirve para corroborar si el texto coincide con el patrón indicado.*/
 
 /***** Función de login *****/
 
 /*Se guarda en la constante userEmail la información que trae validateEmail()
-Condición: si el valor de la constante es true se guarda en local storage el usuario y se redirige a la página index.html.
-En caso contrario se muestra la alerta de mail incorrecto.
+Se guarda en constante userPass el valor introducido en el input de contraseña.
+Condición: si el valor de la constante userEmail y en userPass se ingresó un valor devolverá true.
+Por lo cual, guarda en local storage el usuario y se redirige a la página index.html.
+En caso contrario se muestra la alerta de mail o contraseña incorrecta.
 Se crea el evento al botón, ya que al clickearlo se hace uso de la función.*/
 
 function validateEmail(){
@@ -25,12 +28,12 @@ function validateEmail(){
 
 function login(){
     const userEmail = validateEmail()
-
-        if (userEmail) {
+    const userPass = document.getElementById("pass").value;
+        if ((userEmail) && (userPass !== "")){
             localStorage.setItem("user", userEmail)
             location.href="index.html"
         } else {
-            alert("La dirección de email no es válida")
+            alert("Dirección de mail o contraseña incorrecta")
         }
 }
 const pressButton = document.getElementById("entrar")
