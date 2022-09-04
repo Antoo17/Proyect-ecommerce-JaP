@@ -40,8 +40,7 @@ let getJSONData = function(url){
     });
 }
 
-/* 
-Se trae al id "email-user" y con la propiedad innerHTML se trae el usuario almacenado en localstorage.
+/*Se trae al id "email-user" y con la propiedad innerHTML se trae el usuario almacenado en localstorage.
 Evento al id "email-user" para que remueva el usuario de localstorage y se diriga a login.html.*/
 
 document.getElementById("email-user").innerHTML = localStorage.getItem("user");

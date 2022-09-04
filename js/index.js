@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
-/*Almacenamos en variable el dato de usuario con getItem y en caso de que sea null se dirigirá a login.html.*/
+
+    /*Almacenamos en variable el dato de usuario con getItem y en caso de que sea null se dirigirá a login.html.*/
     let usuario = localStorage.getItem("user");
     
     if(usuario == null){
